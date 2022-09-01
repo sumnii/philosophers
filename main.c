@@ -10,7 +10,7 @@ void	*print()
 
 int	main(int argc, char *argv[])
 {
-	t_info	info;
+	t_info	*info;
 	t_philo philo;
 
 //	info.num_of_philo = 1;
@@ -24,6 +24,9 @@ int	main(int argc, char *argv[])
 //	return (0);
 	if (arg_invalid_check(argc, argv))
 		return (1);
-//	initialize(argc, argv);
-//	philosophers();
+	info = initialize(argv);
+	if (!info)
+		return (1);
+	printf("%d %d\n", info->must_eat, info->time_to_sleep);
+	free(info);
 }

@@ -20,11 +20,14 @@ typedef struct s_philo {
 	int			id;
 }			t_philo;
 
-int ft_strlen(char *str);
-int ft_atoi(char *str);
+int 	ft_strlen(char *str);
+int 	ft_atoi(char *str);
 
-int	arg_count_check(int argc);
-int arg_is_num_check(char *argv[]);
-int	arg_invalid_check(int argc, char *argv[]);
+int		arg_count_check(int argc);
+int 	arg_is_num_check(char *argv[]);
+int		arg_invalid_check(int argc, char *argv[]);
+
+int 	put_arg(t_info *info, char *argv[]);
+t_info *initialize(char *argv[]);
 
 #endif PHILOSOPHERS_H

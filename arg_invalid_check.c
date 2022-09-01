@@ -41,6 +41,7 @@ int arg_invalid_check(int argc, char *argv[])
 			++i;
 		}
 	}
+	// for arg check. need to remove.
 	return (0);
 }
 
