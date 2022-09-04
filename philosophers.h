@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <sys/time.h>
+#include <time.h>
 
 typedef struct s_info {
 	int num_of_philo;
@@ -34,6 +36,8 @@ int 	put_arg(t_info *info, char *argv[]);
 t_info	*init_info(char *argv[]);
 t_philo	**init_philo(t_info *info, int num_of_philo);
 
+double	get_time(void);
+double	count_time(double start_time);
 void	grab_fork(t_philo *philo);
 void	*philo_routine(void *param);
 int		create_thread(t_info *info, t_philo **philo);

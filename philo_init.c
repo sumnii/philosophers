@@ -2,6 +2,8 @@
 
 int put_arg(t_info *info, char *argv[])
 {
+	int i;
+
 	info->num_of_philo = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
@@ -11,6 +13,9 @@ int put_arg(t_info *info, char *argv[])
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
 	if (!info->forks)
 		return (0);
+	i = -1;
+	while(++i < info->num_of_philo)
+		pthread_mutex_init(&((info->forks)[i]), NULL);
 	return (1);
 }
 
@@ -42,7 +47,7 @@ t_philo	**init_philo(t_info *info, int num_of_philo)
 			return (0);
 		philos[i]->id = i + 1;
 		if (i == 0)
-			philos[i]->l_fork = &(info->forks[num_of_philo]);
+			philos[i]->l_fork = &(info->forks[num_of_philo - 1]);
 		else
 			philos[i]->l_fork = &(info->forks[i - 1]);
 		philos[i]->r_fork = &(info->forks[i]);
