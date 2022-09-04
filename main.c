@@ -1,32 +1,29 @@
 #include "philosophers.h"
 
-void	*print()
-{
-	pthread_t id;
-
-	id = pthread_self();
-	printf("this is philo : %d\n", id);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_info	*info;
-	t_philo philo;
+	t_philo	*philo;
 
-//	info.num_of_philo = 1;
-//	if ((pthread_create(&(philo.thread), NULL, print, &info)) < 0)
-//	{
-//		printf("create error!\n");
-//		return (0);
-//	}
-//	printf("%d : philo\n%d : this is main.\n", philo.thread, pthread_self());
-//	sleep(1);
-//	return (0);
 	if (arg_invalid_check(argc, argv))
 		return (1);
-	info = initialize(argv);
-	if (!info)
-		return (1);
+	info = init_info(argv);
+	philo = init_philo(info, info->num_of_philo);
+	if (!info || !philo)
+		return (free_return (info, philo, 1));
 	printf("%d %d\n", info->must_eat, info->time_to_sleep);
-	free(info);
+//	if (!(routine_philo(info, philo)))
+//		return (1);
+	return(free_return(info, philo, 0));
+}
+
+int	free_return(t_info *info, t_philo *philo, int return_flag)
+{
+	if (info && info->forks)
+		free(info->forks);
+	if (info)
+		free(info);
+	if (philo)
+		free(philo);
+	return (return_flag);
 }
