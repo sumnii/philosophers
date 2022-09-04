@@ -20,10 +20,7 @@ t_info *init_info(char *argv[])
 
 	info = malloc(sizeof(t_info));
 	if (!info)
-	{
-		printf("info malloc error!\n");
 		return (0);
-	}
 	if (!put_arg(info, argv))
 		return (0);
 	return (info);
@@ -36,10 +33,7 @@ t_philo	**init_philo(t_info *info, int num_of_philo)
 
 	philos = malloc(sizeof(t_philo *) * num_of_philo);
 	if (!philos)
-	{
-		printf("philo malloc error!\n");
 		return (0);
-	}
 	i = -1;
 	while (++i < num_of_philo)
 	{
@@ -55,31 +49,4 @@ t_philo	**init_philo(t_info *info, int num_of_philo)
 		philos[i]->info = info;
 	}
 	return (philos);
-}
-
-void	*intro_print(void *param)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)param;
-	printf("[%d] >> I'm created philo: %d\n\n", philo->id, philo->thread);
-	return (NULL);
-}
-
-int	routine_philo(t_info *info, t_philo **philo)
-{
-	int 	i;
-
-	i = info->num_of_philo;
-	while (i-- >= 0)
-	{
-		if ((pthread_create(&(philo[i]->thread), NULL, intro_print, (void *)philo[i])) < 0)
-		{
-			printf("philo create error!\n");
-			return (0);
-		}
-		printf("%d : this is main. >> I just create %d:philo\n", pthread_self(), philo[i]->thread);
-		usleep(100);
-	}
-	return (1);
 }
