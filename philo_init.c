@@ -29,12 +29,12 @@ t_info *init_info(char *argv[])
 	return (info);
 }
 
-t_philo	*init_philo(t_info *info, int num_of_philo)
+t_philo	**init_philo(t_info *info, int num_of_philo)
 {
-	t_philo	*philos;
+	t_philo	**philos;
 	int 	i;
 
-	philos = malloc(sizeof(t_philo) * num_of_philo);
+	philos = malloc(sizeof(t_philo *) * num_of_philo);
 	if (!philos)
 	{
 		printf("philo malloc error!\n");
@@ -43,42 +43,42 @@ t_philo	*init_philo(t_info *info, int num_of_philo)
 	i = -1;
 	while (++i < num_of_philo)
 	{
-		philos[i].id = i;
+		philos[i] = malloc(sizeof(t_philo));
+		if (!philos[i])
+			return (0);
+		philos[i]->id = i + 1;
 		if (i == 0)
-			philos[i].l_fork = &(info->forks[num_of_philo]);
+			philos[i]->l_fork = &(info->forks[num_of_philo]);
 		else
-			philos[i].l_fork = &(info->forks[i - 1]);
-		philos[i].r_fork = &(info->forks[i]);
-		philos[i].info = info;
+			philos[i]->l_fork = &(info->forks[i - 1]);
+		philos[i]->r_fork = &(info->forks[i]);
+		philos[i]->info = info;
 	}
 	return (philos);
 }
 
 void	*intro_print(void *param)
 {
-	pthread_t	id;
-	t_info		*info;
+	t_philo	*philo;
 
-	info = (t_info *)param;
-	id = pthread_self();
-//	printf("[%d] >> I'm created philo: %d\n\n", info->num_of_philo, id);
-	--(info->num_of_philo);
+	philo = (t_philo *)param;
+	printf("[%d] >> I'm created philo: %d\n\n", philo->id, philo->thread);
 	return (NULL);
 }
 
-int	routine_philo(t_info *info, t_philo *philo)
+int	routine_philo(t_info *info, t_philo **philo)
 {
 	int 	i;
 
 	i = info->num_of_philo;
 	while (i-- >= 0)
 	{
-		if ((pthread_create(&(philo[i].thread), NULL, intro_print, philo)) < 0)
+		if ((pthread_create(&(philo[i]->thread), NULL, intro_print, (void *)philo[i])) < 0)
 		{
 			printf("philo create error!\n");
 			return (0);
 		}
-		printf("%d : this is main. >> I just create %d:philo\n", pthread_self(), philo[i].thread);
+		printf("%d : this is main. >> I just create %d:philo\n", pthread_self(), philo[i]->thread);
 		usleep(100);
 	}
 	return (1);

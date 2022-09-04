@@ -3,7 +3,7 @@
 int	main(int argc, char *argv[])
 {
 	t_info	*info;
-	t_philo	*philo;
+	t_philo	**philo;
 
 	if (arg_invalid_check(argc, argv))
 		return (1);
@@ -12,12 +12,12 @@ int	main(int argc, char *argv[])
 	if (!info || !philo)
 		return (free_return (info, philo, 1));
 	printf("%d %d\n", info->must_eat, info->time_to_sleep);
-//	if (!(routine_philo(info, philo)))
-//		return (1);
+	if (!(routine_philo(info, philo)))
+		return (free_return (info, philo, 1));
 	return(free_return(info, philo, 0));
 }
 
-int	free_return(t_info *info, t_philo *philo, int return_flag)
+int	free_return(t_info *info, t_philo **philo, int return_flag)
 {
 	if (info && info->forks)
 		free(info->forks);
