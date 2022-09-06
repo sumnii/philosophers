@@ -42,7 +42,8 @@ int 	put_arg(t_info *info, char *argv[]);
 t_info	*init_info(char *argv[]);
 t_philo	**init_philo(t_info *info, int num_of_philo);
 
-void	grab_fork(t_philo *philo);
+void	philo_eat(t_philo *philo);
+void	philo_sleep(t_philo *philo);
 void	*philo_routine(void *param);
 int		create_thread(t_info *info, t_philo **philo);
 
