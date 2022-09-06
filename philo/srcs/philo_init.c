@@ -59,7 +59,7 @@ t_philo	*init_philo(t_info *info, int num_of_philo)
 	while (++i < num_of_philo)
 	{
 		philos[i].id = i + 1;
-		philos[i].count_eat = info->must_eat;
+		philos[i].count_eat = 0;
 		philos[i].last_eat_time = get_time();
 		philos[i].die_alerted = 0;
 		if (i == 0)

@@ -27,10 +27,10 @@ void	philo_eat_odd(t_philo *philo)
 	pthread_mutex_lock(&(philo->info->printer));
 	printf("%6ld | %3d has taken a left fork\n", count_time(start), id);
 	pthread_mutex_unlock(&(philo->info->printer));
-	--(philo->count_eat);
+	++(philo->count_eat);
+	philo->last_eat_time = get_time();
 	pthread_mutex_lock(&(philo->info->printer));
 	printf("%6ld | %3d is eating\n", count_time(start), id);
-	philo->last_eat_time = get_time();
 	pthread_mutex_unlock(&(philo->info->printer));
 	usleep_while(philo->info->time_to_eat);
 	pthread_mutex_unlock(philo->l_fork);
@@ -52,10 +52,10 @@ void	philo_eat_even(t_philo *philo)
 	pthread_mutex_lock(&(philo->info->printer));
 	printf("%6ld | %3d has taken a right fork\n", count_time(start), id);
 	pthread_mutex_unlock(&(philo->info->printer));
-	--(philo->count_eat);
+	++(philo->count_eat);
+	philo->last_eat_time = get_time();
 	pthread_mutex_lock(&(philo->info->printer));
 	printf("%6ld | %3d is eating\n", count_time(start), id);
-	philo->last_eat_time = get_time();
 	pthread_mutex_unlock(&(philo->info->printer));
 	usleep_while(philo->info->time_to_eat);
 	pthread_mutex_unlock(philo->l_fork);
@@ -89,14 +89,12 @@ void	philo_routine(void *param)
 	t_philo	*philo;
 
 	philo = (t_philo *)param;
-	while (philo->count_eat != 0)
+	while (1)
 	{
 		if (philo->id % 2 == 0)
 			philo_eat_even(philo);
 		else
 			philo_eat_odd(philo);
-		if (philo->count_eat == 0)
-			break ;
 		philo_sleep(philo);
 		philo_think(philo);
 	}

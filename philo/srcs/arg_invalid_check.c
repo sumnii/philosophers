@@ -41,8 +41,6 @@ int	arg_is_num_check(char *argv[])
 
 int	arg_invalid_check(int argc, char *argv[])
 {
-	int	i;
-
 	if (arg_count_check(argc))
 		return (1);
 	else if (arg_is_num_check(argv))

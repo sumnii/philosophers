@@ -32,22 +32,20 @@ int	alert_die(t_philo *philo, int idx, int flag)
 int	monitoring(t_philo *philo)
 {
 	int		i;
-	int		sum_count_eat;
+	int		count_full;
 
 	while (1)
 	{
-		sum_count_eat = 0;
+		count_full = 0;
 		i = -1;
 		while (++i < philo->info->num_of_philo)
 		{
 			if (count_time(philo[i].last_eat_time) > philo->info->time_to_die)
 				return (alert_die(philo, i, 0));
-			else if (philo[i].count_eat == 0)
-				alert_die(philo, i, 1);
-			else
-				sum_count_eat += philo[i].count_eat;
+			else if (philo[i].count_eat == philo->info->must_eat)
+				++count_full;
 		}
-		if (sum_count_eat == 0)
+		if (count_full == philo->info->num_of_philo)
 			return (free_return(philo->info, philo, 0));
 	}
 }
