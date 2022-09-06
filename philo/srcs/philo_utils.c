@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/06 20:42:19 by sumsong           #+#    #+#             */
+/*   Updated: 2022/09/06 20:45:02 by sumsong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philosophers.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (str[len])
@@ -10,11 +22,11 @@ int ft_strlen(char *str)
 	return (len);
 }
 
-int ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
-	int str_len;
-	int num;
-	int i;
+	int	str_len;
+	int	num;
+	int	i;
 
 	str_len = ft_strlen(str);
 	num = 0;

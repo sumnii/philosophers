@@ -1,7 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/06 20:42:04 by sumsong           #+#    #+#              #
+#    Updated: 2022/09/06 20:42:05 by sumsong          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME			=	philo
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 RM				=	rm -rf
 
 SRC_DIR			=	./srcs/

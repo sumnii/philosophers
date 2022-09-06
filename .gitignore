@@ -2,7 +2,7 @@ a.out
 cmake-build-debug
 *.dSYM
 .vscode
-CMakeLists.txt
+philo/CMakeLists.txt
 .idea
-philo
+philo/philo
 *.o

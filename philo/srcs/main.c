@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/06 20:42:10 by sumsong           #+#    #+#             */
+/*   Updated: 2022/09/06 20:53:26 by sumsong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philosophers.h"
 
 int	main(int argc, char *argv[])
@@ -16,9 +28,27 @@ int	main(int argc, char *argv[])
 	return (monitoring(philo));
 }
 
+int	create_thread(t_info *info, t_philo *philo)
+{
+	int	i;
+
+	i = info->num_of_philo;
+	while (--i >= 0)
+	{
+		if ((pthread_create(&(philo[i].thread), NULL,
+					(void *)philo_routine, &philo[i])) < 0)
+		{
+			printf("%3d philo create error!\n", i);
+			return (0);
+		}
+		pthread_detach(philo[i].thread);
+	}
+	return (1);
+}
+
 int	free_return(t_info *info, t_philo *philo, int return_flag)
 {
-	int i;
+	int	i;
 
 	if (info && info->forks)
 	{

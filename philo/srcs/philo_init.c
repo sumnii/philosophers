@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_init.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/06 20:42:12 by sumsong           #+#    #+#             */
+/*   Updated: 2022/09/06 20:46:25 by sumsong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../philosophers.h"
 
-int put_arg(t_info *info, char *argv[])
+int	put_arg(t_info *info, char *argv[])
 {
-	int i;
+	int	i;
 
 	info->num_of_philo = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
@@ -18,12 +30,12 @@ int put_arg(t_info *info, char *argv[])
 	if (!info->forks)
 		return (0);
 	i = -1;
-	while(++i < info->num_of_philo)
+	while (++i < info->num_of_philo)
 		pthread_mutex_init(&((info->forks)[i]), NULL);
 	return (1);
 }
 
-t_info *init_info(char *argv[])
+t_info	*init_info(char *argv[])
 {
 	t_info	*info;
 
@@ -38,7 +50,7 @@ t_info *init_info(char *argv[])
 t_philo	*init_philo(t_info *info, int num_of_philo)
 {
 	t_philo	*philos;
-	int 	i;
+	int		i;
 
 	philos = (t_philo *)malloc(sizeof(t_philo) * num_of_philo);
 	if (!philos)
