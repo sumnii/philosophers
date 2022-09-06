@@ -49,6 +49,16 @@ void	philo_sleep(t_philo *philo)
 	usleep_while(philo->info->time_to_sleep);
 }
 
+void	philo_think(t_philo *philo)
+{
+	long start_time;
+
+	start_time = philo->info->start_time;
+	pthread_mutex_lock(&(philo->info->printer));
+	printf("%6ld : %4d is thinking\n", count_time(start_time), philo->id);
+	pthread_mutex_unlock(&(philo->info->printer));
+}
+
 void	*philo_routine(void *param)
 {
 	t_philo	*philo;
@@ -61,26 +71,25 @@ void	*philo_routine(void *param)
 		if (philo->count_eat == 0)
 			return (NULL);
 		philo_sleep(philo);
+		philo_think(philo);
 	}
 }
 
-int	create_thread(t_info *info, t_philo **philo)
+int	create_thread(t_info *info, t_philo *philo)
 {
 	int 	i;
 
 	i = info->num_of_philo;
 	while (--i >= 0)
 	{
-		if ((pthread_create(&(philo[i]->thread), NULL, philo_routine, (void *)philo[i])) < 0)
+		if ((pthread_create(&(philo[i].thread), NULL, philo_routine, &philo[i])) < 0)
 		{
 			printf("philo create error!\n");
 			return (0);
 		}
-//		printf("main >> create philo: %4d\n", philo[i]->id);
-		pthread_detach(philo[i]->thread);
-//		pthread_join(philo[i]->thread, NULL);
+//		printf("main >> create philo: %4d\n", philo[i].id);
+		pthread_detach(philo[i].thread);
+//		pthread_join(philo[i].thread, NULL);
 	}
-	while (1)
-		;
 	return (1);
 }

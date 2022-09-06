@@ -3,7 +3,7 @@
 int	main(int argc, char *argv[])
 {
 	t_info	*info;
-	t_philo	**philo;
+	t_philo	*philo;
 
 	if (arg_invalid_check(argc, argv))
 		return (1);
@@ -13,23 +13,26 @@ int	main(int argc, char *argv[])
 		return (free_return (info, philo, 1));
 	if (!(create_thread(info, philo)))
 		return (free_return (info, philo, 1));
-	return(free_return(info, philo, 0));
+	return(0);
 }
 
-int	free_return(t_info *info, t_philo **philo, int return_flag)
+int	free_return(t_info *info, t_philo *philo, int return_flag)
 {
 	int i;
 
 	if (info && info->forks)
-		free(info->forks);
-	if (info)
-		free(info);
-	i = 0;
-	if (philo)
 	{
-		while (philo[i])
-			free(philo[i++]);
-		free(philo);
+		i = -1;
+		while (++i < info->num_of_philo)
+			pthread_mutex_destroy(&(info->forks[i]));
+		free(info->forks);
 	}
+	if (info)
+	{
+		pthread_mutex_destroy(&(info->printer));
+		free(info);
+	}
+	if (philo)
+		free(philo);
 	return (return_flag);
 }

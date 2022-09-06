@@ -40,13 +40,14 @@ int		arg_invalid_check(int argc, char *argv[]);
 
 int 	put_arg(t_info *info, char *argv[]);
 t_info	*init_info(char *argv[]);
-t_philo	**init_philo(t_info *info, int num_of_philo);
+t_philo	*init_philo(t_info *info, int num_of_philo);
 
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
-void	*philo_routine(void *param);
-int		create_thread(t_info *info, t_philo **philo);
+void	philo_think(t_philo *philo);
+void	*philo_routine(void *philo);
+int		create_thread(t_info *info, t_philo *philo);
 
-int		free_return(t_info *info, t_philo **philo, int return_flag);
+int		free_return(t_info *info, t_philo *philo, int return_flag);
 
 #endif

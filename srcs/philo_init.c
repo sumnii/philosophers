@@ -35,28 +35,25 @@ t_info *init_info(char *argv[])
 	return (info);
 }
 
-t_philo	**init_philo(t_info *info, int num_of_philo)
+t_philo	*init_philo(t_info *info, int num_of_philo)
 {
-	t_philo	**philos;
+	t_philo	*philos;
 	int 	i;
 
-	philos = malloc(sizeof(t_philo *) * num_of_philo);
+	philos = (t_philo *)malloc(sizeof(t_philo) * num_of_philo);
 	if (!philos)
 		return (0);
 	i = -1;
 	while (++i < num_of_philo)
 	{
-		philos[i] = malloc(sizeof(t_philo));
-		if (!philos[i])
-			return (0);
-		philos[i]->id = i + 1;
-		philos[i]->count_eat = info->must_eat;
+		philos[i].id = i + 1;
+		philos[i].count_eat = info->must_eat;
 		if (i == 0)
-			philos[i]->l_fork = &(info->forks[num_of_philo - 1]);
+			philos[i].l_fork = &(info->forks[num_of_philo - 1]);
 		else
-			philos[i]->l_fork = &(info->forks[i - 1]);
-		philos[i]->r_fork = &(info->forks[i]);
-		philos[i]->info = info;
+			philos[i].l_fork = &(info->forks[i - 1]);
+		philos[i].r_fork = &(info->forks[i]);
+		philos[i].info = info;
 	}
 	return (philos);
 }
