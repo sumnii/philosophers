@@ -10,6 +10,10 @@ int put_arg(t_info *info, char *argv[])
 	info->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5])
 		info->must_eat = ft_atoi(argv[5]);
+	else
+		info->must_eat = -1;
+	info->start_time = get_time();
+	info->forks = pthread_mutex_init(&(info->printer));
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
 	if (!info->forks)
 		return (0);
@@ -46,6 +50,7 @@ t_philo	**init_philo(t_info *info, int num_of_philo)
 		if (!philos[i])
 			return (0);
 		philos[i]->id = i + 1;
+		philos[i]->count_eat = info->must_eat;
 		if (i == 0)
 			philos[i]->l_fork = &(info->forks[num_of_philo - 1]);
 		else

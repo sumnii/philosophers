@@ -9,17 +9,20 @@
 #include <time.h>
 
 typedef struct s_info {
-	int num_of_philo;
-	int time_to_die;
-	int time_to_eat;
-	int time_to_sleep;
-	int must_eat;
+	int 			num_of_philo;
+	int			 	time_to_die;
+	int 			time_to_eat;
+	int 			time_to_sleep;
+	int 			must_eat;
+	double			start_time;
+	pthread_mutex_t *printer;
 	pthread_mutex_t *forks;
 }				t_info;
 
 typedef struct s_philo {
 	pthread_t		thread;
 	int 			id;
+	int 			count_eat;
 	pthread_mutex_t *l_fork;
 	pthread_mutex_t *r_fork;
 	t_info			*info;
