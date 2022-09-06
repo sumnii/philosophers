@@ -1,4 +1,4 @@
-#include "philosophers.h"
+#include "../philosophers.h"
 
 int arg_count_check(int argc)
 {

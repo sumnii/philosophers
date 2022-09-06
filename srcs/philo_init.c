@@ -1,4 +1,4 @@
-#include "philosophers.h"
+#include "../philosophers.h"
 
 int put_arg(t_info *info, char *argv[])
 {
@@ -13,7 +13,7 @@ int put_arg(t_info *info, char *argv[])
 	else
 		info->must_eat = -1;
 	info->start_time = get_time();
-	info->forks = pthread_mutex_init(&(info->printer));
+	pthread_mutex_init(&(info->printer), NULL);
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
 	if (!info->forks)
 		return (0);

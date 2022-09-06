@@ -10,12 +10,12 @@
 
 typedef struct s_info {
 	int 			num_of_philo;
-	int			 	time_to_die;
-	int 			time_to_eat;
-	int 			time_to_sleep;
+	long			time_to_die;
+	long 			time_to_eat;
+	long 			time_to_sleep;
 	int 			must_eat;
-	double			start_time;
-	pthread_mutex_t *printer;
+	long			start_time;
+	pthread_mutex_t printer;
 	pthread_mutex_t *forks;
 }				t_info;
 
@@ -30,6 +30,9 @@ typedef struct s_philo {
 
 int 	ft_strlen(char *str);
 int 	ft_atoi(char *str);
+long	get_time(void);
+long	count_time(long start_time);
+void	usleep_while(long time_to_act);
 
 int		arg_count_check(int argc);
 int 	arg_is_num_check(char *argv[]);
@@ -39,12 +42,10 @@ int 	put_arg(t_info *info, char *argv[]);
 t_info	*init_info(char *argv[]);
 t_philo	**init_philo(t_info *info, int num_of_philo);
 
-double	get_time(void);
-double	count_time(double start_time);
 void	grab_fork(t_philo *philo);
 void	*philo_routine(void *param);
 int		create_thread(t_info *info, t_philo **philo);
 
 int		free_return(t_info *info, t_philo **philo, int return_flag);
 
-#endif PHILOSOPHERS_H
+#endif
