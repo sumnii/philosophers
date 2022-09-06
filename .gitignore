@@ -6,3 +6,5 @@ philo/CMakeLists.txt
 .idea
 philo/philo
 *.o
+.DS_Store
+.gitignore
