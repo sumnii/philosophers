@@ -62,7 +62,7 @@ void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 void	philo_routine(void *philo);
 
-int		alert_die(t_philo *philo, int idx, int flag);
+int		alert_die(t_philo *philo, int idx);
 int		monitoring(t_philo *philo);
 
 int		create_thread(t_info *info, t_philo *philo);
