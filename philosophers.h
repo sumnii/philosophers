@@ -23,6 +23,7 @@ typedef struct s_philo {
 	pthread_t		thread;
 	int 			id;
 	int 			count_eat;
+	long 			last_eat_time;
 	pthread_mutex_t *l_fork;
 	pthread_mutex_t *r_fork;
 	t_info			*info;
@@ -47,6 +48,9 @@ void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 void	*philo_routine(void *philo);
 int		create_thread(t_info *info, t_philo *philo);
+
+int		alert_die(t_philo *philo, int id, int flag);
+int		monitoring(t_philo *philo);
 
 int		free_return(t_info *info, t_philo *philo, int return_flag);
 

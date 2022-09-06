@@ -48,6 +48,7 @@ t_philo	*init_philo(t_info *info, int num_of_philo)
 	{
 		philos[i].id = i + 1;
 		philos[i].count_eat = info->must_eat;
+		philos[i].last_eat_time = get_time();
 		if (i == 0)
 			philos[i].l_fork = &(info->forks[num_of_philo - 1]);
 		else

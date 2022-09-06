@@ -6,7 +6,7 @@ RM				=	rm -rf
 
 SRC_DIR			=	./srcs/
 SRC				=	main.c arg_invalid_check.c philo_init.c philo_utils.c \
-					philo_routine.c
+					philo_routine.c philo_monitoring.c
 
 SRCS			=	$(addprefix $(SRC_DIR), $(SRC))
 OBJS			=	$(SRCS:.c=.o)

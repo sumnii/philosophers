@@ -13,7 +13,7 @@ int	main(int argc, char *argv[])
 		return (free_return (info, philo, 1));
 	if (!(create_thread(info, philo)))
 		return (free_return (info, philo, 1));
-	return(0);
+	return(monitoring(philo));
 }
 
 int	free_return(t_info *info, t_philo *philo, int return_flag)
