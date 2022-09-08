@@ -6,7 +6,7 @@
 /*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:42:23 by sumsong           #+#    #+#             */
-/*   Updated: 2022/09/06 20:55:06 by sumsong          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:15:11 by sumsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 # include <unistd.h>
 # include <sys/time.h>
 # include <time.h>
+
+enum e_status {
+	LEFT_FORK,
+	RIGHT_FORK,
+	EAT,
+	SLEEP,
+	THINK
+};
 
 typedef struct s_info {
 	int				num_of_philo;
@@ -61,6 +69,8 @@ void	philo_eat_even(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 void	philo_routine(void *philo);
+
+void	print_status(t_philo *philo, int status);
 
 int		alert_die(t_philo *philo, int idx);
 int		monitoring(t_philo *philo);

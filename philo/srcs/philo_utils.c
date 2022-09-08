@@ -6,7 +6,7 @@
 /*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:42:19 by sumsong           #+#    #+#             */
-/*   Updated: 2022/09/06 20:45:02 by sumsong          ###   ########.fr       */
+/*   Updated: 2022/09/06 22:13:24 by sumsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	usleep_while(long time_to_act)
 
 	start = get_time();
 	time_diff = count_time(start);
-	while (time_diff <= time_to_act)
+	while (time_diff < time_to_act)
 	{
 		usleep(100);
 		time_diff = count_time(start);

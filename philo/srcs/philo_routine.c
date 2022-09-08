@@ -6,7 +6,7 @@
 /*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:42:17 by sumsong           #+#    #+#             */
-/*   Updated: 2022/09/06 20:53:16 by sumsong          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:15:33 by sumsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,27 @@
 
 void	philo_eat_odd(t_philo *philo)
 {
-	long	start;
-	int		id;
-
-	start = philo->info->start_time;
-	id = philo->id;
 	pthread_mutex_lock(philo->r_fork);
-	pthread_mutex_lock(&(philo->info->printer));
-	printf("%6ld | %3d has taken a right fork\n", count_time(start), id);
-	pthread_mutex_unlock(&(philo->info->printer));
+	print_status(philo, RIGHT_FORK);
 	pthread_mutex_lock(philo->l_fork);
-	pthread_mutex_lock(&(philo->info->printer));
-	printf("%6ld | %3d has taken a left fork\n", count_time(start), id);
-	pthread_mutex_unlock(&(philo->info->printer));
+	print_status(philo, LEFT_FORK);
 	++(philo->count_eat);
 	philo->last_eat_time = get_time();
-	pthread_mutex_lock(&(philo->info->printer));
-	printf("%6ld | %3d is eating\n", count_time(start), id);
-	pthread_mutex_unlock(&(philo->info->printer));
+	print_status(philo, EAT);
 	usleep_while(philo->info->time_to_eat);
-	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(philo->l_fork);
 }
 
 void	philo_eat_even(t_philo *philo)
 {
-	long	start;
-	int		id;
-
-	start = philo->info->start_time;
-	id = philo->id;
 	pthread_mutex_lock(philo->l_fork);
-	pthread_mutex_lock(&(philo->info->printer));
-	printf("%6ld | %3d has taken a left fork\n", count_time(start), id);
-	pthread_mutex_unlock(&(philo->info->printer));
+	print_status(philo, LEFT_FORK);
 	pthread_mutex_lock(philo->r_fork);
-	pthread_mutex_lock(&(philo->info->printer));
-	printf("%6ld | %3d has taken a right fork\n", count_time(start), id);
-	pthread_mutex_unlock(&(philo->info->printer));
+	print_status(philo, RIGHT_FORK);
 	++(philo->count_eat);
 	philo->last_eat_time = get_time();
-	pthread_mutex_lock(&(philo->info->printer));
-	printf("%6ld | %3d is eating\n", count_time(start), id);
-	pthread_mutex_unlock(&(philo->info->printer));
+	print_status(philo, EAT);
 	usleep_while(philo->info->time_to_eat);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
@@ -64,23 +42,13 @@ void	philo_eat_even(t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
-	long	start_time;
-
-	start_time = philo->info->start_time;
-	pthread_mutex_lock(&(philo->info->printer));
-	printf("%6ld | %3d is sleeping\n", count_time(start_time), philo->id);
-	pthread_mutex_unlock(&(philo->info->printer));
+	print_status(philo, SLEEP);
 	usleep_while(philo->info->time_to_sleep);
 }
 
 void	philo_think(t_philo *philo)
 {
-	long	start_time;
-
-	start_time = philo->info->start_time;
-	pthread_mutex_lock(&(philo->info->printer));
-	printf("%6ld | %3d is thinking\n", count_time(start_time), philo->id);
-	pthread_mutex_unlock(&(philo->info->printer));
+	print_status(philo, THINK);
 	usleep(200);
 }
 
