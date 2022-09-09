@@ -6,7 +6,7 @@
 /*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:42:23 by sumsong           #+#    #+#             */
-/*   Updated: 2022/09/08 12:15:11 by sumsong          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:20:29 by sumsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_info {
 	long			start_time;
 	pthread_mutex_t	printer;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	eat_status;
 }				t_info;
 
 typedef struct s_philo {
@@ -44,7 +45,6 @@ typedef struct s_philo {
 	int				id;
 	int				count_eat;
 	long			last_eat_time;
-	int				die_alerted;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	t_info			*info;

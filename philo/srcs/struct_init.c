@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_init.c                                       :+:      :+:    :+:   */
+/*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:42:12 by sumsong           #+#    #+#             */
-/*   Updated: 2022/09/06 20:46:25 by sumsong          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:20:16 by sumsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	put_arg(t_info *info, char *argv[])
 		info->must_eat = -1;
 	info->start_time = get_time();
 	pthread_mutex_init(&(info->printer), NULL);
+	pthread_mutex_init(&(info->eat_status), NULL);
 	info->forks = malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
 	if (!info->forks)
 		return (0);
@@ -61,7 +62,6 @@ t_philo	*init_philo(t_info *info, int num_of_philo)
 		philos[i].id = i + 1;
 		philos[i].count_eat = 0;
 		philos[i].last_eat_time = get_time();
-		philos[i].die_alerted = 0;
 		if (i == 0)
 			philos[i].l_fork = &(info->forks[num_of_philo - 1]);
 		else

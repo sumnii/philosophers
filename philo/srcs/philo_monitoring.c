@@ -6,7 +6,7 @@
 /*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:42:15 by sumsong           #+#    #+#             */
-/*   Updated: 2022/09/06 20:43:54 by sumsong          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:25:14 by sumsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ int	monitoring(t_philo *philo)
 		i = -1;
 		while (++i < philo->info->num_of_philo)
 		{
+			pthread_mutex_lock(&(philo->info->eat_status));
 			if (count_time(philo[i].last_eat_time) > philo->info->time_to_die)
 				return (alert_die(philo, i));
 			else if (must_eat != -1 && philo[i].count_eat >= must_eat)
 				++count_full;
+			pthread_mutex_unlock(&(philo->info->eat_status));
 		}
 		if (count_full == philo->info->num_of_philo)
 			return (free_return(philo->info, philo, 0));

@@ -6,7 +6,7 @@
 /*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:42:10 by sumsong           #+#    #+#             */
-/*   Updated: 2022/09/06 22:14:18 by sumsong          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:20:16 by sumsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	free_return(t_info *info, t_philo *philo, int return_flag)
 	if (info)
 	{
 		pthread_mutex_destroy(&(info->printer));
+		pthread_mutex_destroy(&(info->eat_status));
 		free(info);
 	}
 	if (philo)

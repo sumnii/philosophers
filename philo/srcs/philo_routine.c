@@ -6,7 +6,7 @@
 /*   By: sumsong <sumsong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 20:42:17 by sumsong           #+#    #+#             */
-/*   Updated: 2022/09/08 12:15:33 by sumsong          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:20:18 by sumsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	philo_eat_odd(t_philo *philo)
 	print_status(philo, RIGHT_FORK);
 	pthread_mutex_lock(philo->l_fork);
 	print_status(philo, LEFT_FORK);
+	pthread_mutex_lock(&(philo->info->eat_status));
 	++(philo->count_eat);
 	philo->last_eat_time = get_time();
+	pthread_mutex_unlock(&(philo->info->eat_status));
 	print_status(philo, EAT);
 	usleep_while(philo->info->time_to_eat);
 	pthread_mutex_unlock(philo->r_fork);
@@ -32,8 +34,10 @@ void	philo_eat_even(t_philo *philo)
 	print_status(philo, LEFT_FORK);
 	pthread_mutex_lock(philo->r_fork);
 	print_status(philo, RIGHT_FORK);
+	pthread_mutex_lock(&(philo->info->eat_status));
 	++(philo->count_eat);
 	philo->last_eat_time = get_time();
+	pthread_mutex_unlock(&(philo->info->eat_status));
 	print_status(philo, EAT);
 	usleep_while(philo->info->time_to_eat);
 	pthread_mutex_unlock(philo->l_fork);
